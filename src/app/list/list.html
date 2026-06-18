@@ -1,0 +1,77 @@
+<h1>Address Book</h1>
+
+<dx-button
+  text="Add Contact"
+  type="default"
+  (onClick)="showAddPopup()">
+</dx-button>
+
+<br><br>
+
+<dx-data-grid
+  [dataSource]="contacts"
+  [showBorders]="true"
+  (onRowClick)="onRowClick($event)">
+
+  <dxi-column
+    dataField="name"
+    caption="Name">
+  </dxi-column>
+
+  <dxi-column
+    dataField="email"
+    caption="Email">
+  </dxi-column>
+
+  <dxi-column
+    dataField="phone"
+    caption="Phone">
+  </dxi-column>
+
+  <dxi-column
+    caption="Address"
+    cellTemplate="addressTemplate">
+  </dxi-column>
+
+  <dxi-column
+    caption="Delete"
+    cellTemplate="deleteTemplate">
+  </dxi-column>
+
+  <!-- Address Template -->
+
+  <div *dxTemplate="let data of 'addressTemplate'">
+    {{ data.data.street }},
+    {{ data.data.state }},
+    {{ data.data.postcode }}
+  </div>
+
+  <!-- Delete Template -->
+
+  <div *dxTemplate="let data of 'deleteTemplate'">
+
+    <dx-button
+      text="Delete"
+      type="danger"
+      (onClick)="onDeleteClick($event, data.data.id)">
+    </dx-button>
+
+  </div>
+
+</dx-data-grid>
+
+<dx-popup
+  [(visible)]="popupVisible"
+  [width]="700"
+  [height]="650"
+  title="Contact">
+
+  <app-modal
+  [contact]="newContact"
+  [stateList]="addressBookService.stateList"
+  [isNewRecord]="isNewRecord"
+  (save)="saveContact($event)"
+  (close)="popupVisible = false">
+  </app-modal>
+
+</dx-popup>

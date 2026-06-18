@@ -1,0 +1,85 @@
+<div>
+
+  <p>Name</p>
+  <dx-text-box
+    [(value)]="contact.name"
+    [readOnly]="!isNewRecord && !isEditMode">
+  </dx-text-box>
+
+  <p>Email</p>
+  <dx-text-box
+    [(value)]="contact.email"
+    [readOnly]="!isNewRecord && !isEditMode">
+  </dx-text-box>
+
+  <p>Phone</p>
+  <dx-text-box
+    [(value)]="contact.phone"
+    [readOnly]="!isNewRecord && !isEditMode">
+  </dx-text-box>
+
+  <p>Street</p>
+  <dx-text-box
+    [(value)]="contact.street"
+    [readOnly]="!isNewRecord && !isEditMode">
+  </dx-text-box>
+
+  <p>State</p>
+  <dx-select-box
+    [items]="stateList"
+    [(value)]="contact.state"
+    [disabled]="!isNewRecord && !isEditMode">
+  </dx-select-box>
+
+  <p>Postcode</p>
+  <dx-text-box
+    [(value)]="contact.postcode"
+    [readOnly]="!isNewRecord && !isEditMode">
+  </dx-text-box>
+
+  <p>Description</p>
+  <dx-text-area
+    [(value)]="contact.description"
+    [readOnly]="!isNewRecord && !isEditMode">
+  </dx-text-area>
+
+  <br>
+
+  <!-- CREATE -->
+
+  <dx-button
+    *ngIf="isNewRecord"
+    text="Create"
+    type="success"
+    [disabled]="!isFormValid()"
+    (onClick)="onSave()">
+  </dx-button>
+
+  <!-- EDIT -->
+
+  <dx-button
+    *ngIf="!isNewRecord && !isEditMode"
+    text="Edit"
+    type="default"
+    (onClick)="editRecord()">
+  </dx-button>
+
+  <!-- SAVE -->
+
+  <dx-button
+    *ngIf="!isNewRecord && isEditMode"
+    text="Save"
+    type="success"
+    [disabled]="!isFormValid()"
+    (onClick)="saveRecord()">
+  </dx-button>
+
+  &nbsp;
+
+  <dx-button
+    text="Cancel"
+    type="normal"
+    (onClick)="cancel()">
+  </dx-button>
+
+</div>
